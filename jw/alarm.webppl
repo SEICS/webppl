@@ -1,0 +1,18 @@
+// http://webppl.org/
+var prog = function() {
+  var earthquake = flip(.0001);
+  var burglary = flip(.001);
+  var alarm = earthquake || burglary;
+  var phoneWorking = earthquake ? flip(0.7) : flip(0.99);
+  var maryWakes = alarm ? (earthquake ? flip(0.8) : flip(0.6)) : flip(0.2);
+  var called = maryWakes && phoneWorking;
+  condition(called);
+  return burglary
+}
+
+var dist = Infer(
+  {method: 'enumerate', maxExecutions: 1000000},
+  prog);
+
+// print(dist);
+// {"probs":[0.9970065507586945,0.0029934492413055476],"support":[false,true]}

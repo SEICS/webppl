@@ -1,0 +1,2 @@
+let Cloudy = discrete(0.5, 0.5) in
+let Sprinkler = if (Cloudy == int()) then discrete() else discrete() in

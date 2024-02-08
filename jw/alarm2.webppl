@@ -1,0 +1,18 @@
+// http://webppl.org/
+var prog = function() {
+  var earthquake = sample(Discrete({ps: [0.0001, 1-0.0001]}));
+  var burglary = sample(Discrete({ps: [0.001, 1-0.001]}));
+  var alarm = earthquake || burglary;
+  var phoneWorking = earthquake ? sample(Discrete(ps: [0.7,0.3])) : sample(Discrete({ps: [0.99. 1-0.99]}));
+  var maryWakes = alarm ? (earthquake ? sample(Discrete({ps: [0.8, 0.2]})) : sample(Discrete({ps: [0.6, 0.4]}))) : sample(Discrete({ps: [0.2, 0.8]}));
+  var called = maryWakes && phoneWorking;
+  condition(called);
+  return burglary
+}
+
+var dist = Infer(
+  {method: 'enumerate', maxExecutions: 1000000},
+  prog);
+
+// print(dist);
+// {"probs":[0.9970065507586945,0.0029934492413055476],"support":[false,true]}
